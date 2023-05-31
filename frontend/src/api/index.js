@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "";
+// const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = "/api";
 const LOGIN_URL = BASE_URL + "/auth/login";
 const VALIDATE_TOKEN_URL = BASE_URL + "/auth/validate_token";
 const MENU_URL = BASE_URL + "/menu";
