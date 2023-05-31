@@ -1,0 +1,109 @@
+.theme {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(242 242 242);
+}
+.theme-left {
+    flex: 1;
+    width: 50%;
+    position: relative;
+}
+.theme-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5rem;
+    padding-top: 5rem;
+    width: 100%;
+}
+.theme-logo {
+    width: 20.6rem;
+    height: 3.25rem;
+    margin-bottom: 1.5rem;
+}
+.select-location-text {
+    font-family: proxima-nova, sans-serif;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.5rem;
+    color: rgb(106, 103, 110);
+    max-width: 70%;
+}
+input[type='radio'] {
+    accent-color: rgb(0 102 167);
+    cursor: pointer;
+}
+.radio-btns label {
+    color: rgb(0 102 167);
+    font-weight: bold;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.location-picker {
+    width: 65%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid rgb(182 223 238);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+.location-symbol {
+    width: 8%;
+}
+.location-symbol img {
+    height: 20px;
+    margin-left: 10px;
+}
+.location-text {
+    color: rgb(182 223 238);
+    width: 66%;
+    border: none;
+    height: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.location-text::placeholder {
+    color: rgb(182 223 238);
+}
+.location-text:focus {
+    outline: none;
+}
+.locate-me-btn {
+    width: 26%;
+    background-color: rgb(1 171 1);
+    height: 30px;
+    margin-right: 6px;
+    color: white;
+    font-weight: bolder;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.locate-me-btn img {
+    height: 20px;
+    margin-right: 5px;
+}
+.delivery-img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.delivery-img img {
+    width: 100%;
+}
+.theme-right {
+    flex: 1;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.theme-right img {
+    width: 100%;
+}
+.google {
+    margin-bottom: 5px;
+}

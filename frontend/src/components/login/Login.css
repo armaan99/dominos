@@ -1,0 +1,168 @@
+.login-page {
+    position: fixed;
+    top: 45px;
+    left: 0;
+    height: calc(100vh - 45px);
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.601);
+    z-index: 100000000;
+    display: flex;
+    justify-content: flex-end;
+}
+.login-sidebar {
+    height: 100%;
+    width: 100%;
+    max-width: 480px;
+    background-color: #e9edef;
+    position: relative;
+    right: -500px;
+    transition: all 0.8s;
+    padding: 0px 20px;
+}
+.login-back-btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    transform: rotate(180deg);
+}
+.login-back-btn:hover {
+    cursor: pointer;
+}
+.login-back-btn img {
+    height: 20px;
+}
+.pizza-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    width: 50%;
+    height: auto;
+}
+.login-logo {
+    margin-top: 120px;
+    height: 40px;
+    z-index: 20;
+}
+.adv-section {
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.img-content {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.features {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    font-size: 10px;
+    font-weight: 600;
+}
+.feature-img {
+    margin-right: 10px;
+}
+.login-form {
+    background-color: white;
+    margin: 30px;
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px rgb(191 191 191);
+    border-radius: 4px;
+}
+.login-form-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.login-input {
+    height: 35px;
+    font-size: 15px;
+    padding: 0px 10px;
+    margin: 10px 0px
+}
+.login-input:focus {
+    outline: none;
+}
+.login-submit-outer {
+    display: flex;
+    justify-content: flex-end;
+}
+.login-submit {
+    height: 35px;
+    width: 120px;
+    background-color: rgb(100 171 10);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.google-btn {
+    background-color: rgb(220, 78, 65);
+    color: white;
+    padding: 10px 30px;
+    width: max-content;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.google-btn:hover {
+    cursor: pointer;
+}
+.google-btn img {
+    margin-right: 10px;
+}
+@media only screen and (max-width: 500px) {
+    .login-logo {
+        margin-top: 80px;
+        height: 30px
+    }
+    .adv-section {
+        margin-left: 0px;
+    }
+    .login-form {
+        margin: 30px 0px;
+        width: calc(100% - 40px);
+    }
+}
+.loader {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: solid white 2px;
+    border-top: solid 2px transparent;
+    animation: loader 0.75s linear 0s infinite normal forwards;
+    transform: rotate(0deg);
+}
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

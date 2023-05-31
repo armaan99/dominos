@@ -1,0 +1,65 @@
+.footer-content {
+    background-color: rgb(33 46 58);
+    height: auto;
+    padding: 3rem 3rem 1rem;
+    border-bottom: dotted rgb(82 98 116) 1px;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+.footer-inner-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.footer-logo {
+    width: 17rem;
+}
+.footer-nav {
+    display: flex;
+    color: rgb(130 153 176);
+    margin-top: 1.5rem;
+    font-family: proxima-nova, sans-serif;
+    font-size: 0.7rem;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+}
+.download-text {
+    color: rgb(131 154 177);
+    font-family: proxima-nova, sans-serif;
+    font-size: 1.25rem;
+}
+.get-app-images {
+    display: flex;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 10px
+}
+.get-app-images img {
+    height: 2.5rem;
+    width: 8.6rem;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.copyright {
+    height: auto;
+    background-color: rgb(26 39 53);
+    display: flex;
+    justify-content: center;
+    color: rgb(92, 111, 131);
+    padding: 1.4em;
+}
+@media only screen and (max-width: 768px) {
+    .download-text {
+        font-size: 0.9rem;
+    }
+    .get-app-images img {
+        height: 1.5rem;
+        width: auto;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .footer-inner-block {
+        flex-direction: column;
+        gap: 40px
+    }
+}
