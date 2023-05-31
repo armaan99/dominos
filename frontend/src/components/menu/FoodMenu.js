@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./FoodMenu.css";
-import { dominos_pizza } from "../../data/dominos_pizza";
-import { dominos_sides } from "../../data/dominos_sides";
-import { dominos_beverages } from "../../data/dominos_beverages";
 import PizzaCard from "../cards/pizza_card/PizzaCard";
 import SidesCard from "../cards/sides_card/SidesCard";
 import ManiaCard from "../cards/mania_card/ManiaCard";
-import { dominos_combos } from "../../data/dominos_combos";
-import { dominos_dessert } from "../../data/dominos.dessert";
-import { dominos_chicken } from "../../data/dominos_chicken";
-import { dominos_mania } from "../../data/dominos_mania";
 import { fetchMenuItems } from "../../api";
 
 export default function FoodMenu() {
@@ -29,7 +22,6 @@ export default function FoodMenu() {
 
   async function fetchMenu() {
     const res = await fetchMenuItems();
-    console.log(res);
     setMenu(res.data);
   }
 
