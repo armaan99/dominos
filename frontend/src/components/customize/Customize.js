@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Customize.css";
-// import { dominos_toppings } from "../../data/dominosToppings";
 import { fetchToppings } from "./../../api/index";
 
 export default function Customize({
@@ -204,22 +203,22 @@ export default function Customize({
                     <div key={index} className="toppings-item-box">
                       <img src={item.image_url} alt="" />
                       <div className="topping-item-name">{item.name}</div>
-                      {!toppings.includes(item) && (
+                      {!toppings.includes(item._id) && (
                         <div
                           className="add-topping-btn"
                           onClick={() => {
-                            setToppings([...toppings, item]);
+                            setToppings([...toppings, item._id]);
                             setToppingsPrice(toppingsPrice + 60);
                           }}
                         >
                           ADD
                         </div>
                       )}
-                      {toppings.includes(item) && (
+                      {toppings.includes(item._id) && (
                         <div
                           className="remove-topping-btn"
                           onClick={() => {
-                            setToppings(toppings.filter((x) => x !== item));
+                            setToppings(toppings.filter((x) => x !== item._id));
                             setToppingsPrice(toppingsPrice - 60);
                           }}
                         >
@@ -249,22 +248,22 @@ export default function Customize({
                     <div key={index} className="toppings-item-box">
                       <img src={item.image_url} alt="" />
                       <div className="topping-item-name">{item.name}</div>
-                      {!toppings.includes(item) && (
+                      {!toppings.includes(item._id) && (
                         <div
                           className="add-topping-btn"
                           onClick={() => {
-                            setToppings([...toppings, item]);
+                            setToppings([...toppings, item._id]);
                             setToppingsPrice(toppingsPrice + 75);
                           }}
                         >
                           ADD
                         </div>
                       )}
-                      {toppings.includes(item) && (
+                      {toppings.includes(item._id) && (
                         <div
                           className="remove-topping-btn"
                           onClick={() => {
-                            setToppings(toppings.filter((x) => x !== item));
+                            setToppings(toppings.filter((x) => x !== item._id));
                             setToppingsPrice(toppingsPrice - 75);
                           }}
                         >

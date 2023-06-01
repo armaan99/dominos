@@ -83,7 +83,6 @@ export default function PizzaCard({
       price: price,
       qty: 1,
     });
-    console.log(res);
   };
 
   useEffect(() => {
