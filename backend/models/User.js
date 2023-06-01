@@ -6,6 +6,7 @@ const cart = mongoose.Schema({
   crust: { type: String, required: true },
   qty: { type: Number, required: true },
   price: { type: Number, required: true },
+  extra_cheese: { type: Boolean, required: true, default: false },
   toppings: { type: Array, required: false },
 });
 
@@ -25,5 +26,6 @@ const user = mongoose.Schema({
 });
 
 const UserModel = mongoose.model("user", user);
+const CartModel = mongoose.model("cart", cart);
 
-module.exports = { UserModel };
+module.exports = { UserModel, CartModel };

@@ -23,6 +23,12 @@ app.use("/api/auth", authRoutes);
 const menuRoutes = require("./backend/routes/MenuRoutes");
 app.use("/api/menu", menuRoutes);
 
+const toppingsRoutes = require("./backend/routes/ToppingsRoutes");
+app.use("/api/toppings", toppingsRoutes);
+
+const cartRoutes = require("./backend/routes/CartRoutes");
+app.use("/api/cart", cartRoutes);
+
 if (process.env.NODE_ENV == "production") {
   const path = require("path");
   app.use(express.static(path.resolve(__dirname, "frontend", "build")));

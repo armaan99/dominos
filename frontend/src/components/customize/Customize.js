@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Customize.css";
+// import { dominos_toppings } from "../../data/dominosToppings";
+import { fetchToppings } from "./../../api/index";
 
 export default function Customize({
   item,
@@ -10,11 +12,26 @@ export default function Customize({
   setCrust,
   sizes,
   crusts,
+  price,
+  addExtraCheese,
+  setAddExtraCheese,
+  toppings,
+  setToppings,
+  toppingsPrice,
+  setToppingsPrice,
 }) {
+  const [dominosToppings, setDominosToppings] = useState([]);
+
+  async function getToppings() {
+    const res = await fetchToppings();
+    setDominosToppings(res.data);
+  }
+
   useEffect(() => {
     setTimeout(() => {
       document.querySelector(".customization-sidebar").style.left = 0;
     }, 100);
+    getToppings();
   }, []);
 
   return (
@@ -42,9 +59,7 @@ export default function Customize({
             }
             alt="Veg / Non-veg"
           />
-          <div className="prod-price">
-            ₹{item.size[size].filter((x) => x.crust === crust)[0].price}
-          </div>
+          <div className="prod-price">₹ {price + toppingsPrice}</div>
         </div>
         <div className="prod-details">
           <div className="prod-title">{item.name}</div>
@@ -125,6 +140,149 @@ export default function Customize({
               </div>
             </div>
           </div>
+
+          <div className="prod-extra-cheese">
+            <div className="cheese-text">Extra Cheese</div>
+            <div className="cheese-selector">
+              <div
+                className={addExtraCheese ? "cheese-box focused" : "cheese-box"}
+                onClick={() => {
+                  setAddExtraCheese(!addExtraCheese);
+                  if (addExtraCheese) {
+                    setToppingsPrice(toppingsPrice - 75);
+                  } else {
+                    setToppingsPrice(toppingsPrice + 75);
+                  }
+                }}
+              >
+                <div
+                  className={
+                    addExtraCheese
+                      ? "add-cheese-text-focused"
+                      : "add-cheese-text"
+                  }
+                >
+                  I want to add extra cheese
+                </div>
+                <div
+                  className={
+                    addExtraCheese
+                      ? "cheese-price cheese-price-focused"
+                      : "cheese-price"
+                  }
+                >
+                  ₹75
+                </div>
+                {!addExtraCheese && <div className="add-cheese-btn">ADD</div>}
+                {addExtraCheese && (
+                  <div className="remove-cheese-btn">REMOVE</div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="prod-add-toppings">
+            <div className="toppings-text">Add Toppings</div>
+            <div className="prod-add-topping-text">
+              You can add more toppings
+            </div>
+            <div className="separator"></div>
+            <div className="toppings-box">
+              <div className="toppings-header">
+                <img
+                  src="https://pizzaonline.dominos.co.in/static/assets/icons/veg.svg"
+                  alt="veg"
+                />
+                <div className="toppings-title">
+                  Add Veg Toppings @ ₹60.00 each
+                </div>
+              </div>
+              <div className="toppings-body">
+                {dominosToppings
+                  .filter((x) => x.is_veg === true)
+                  .map((item, index) => (
+                    <div key={index} className="toppings-item-box">
+                      <img src={item.image_url} alt="" />
+                      <div className="topping-item-name">{item.name}</div>
+                      {!toppings.includes(item) && (
+                        <div
+                          className="add-topping-btn"
+                          onClick={() => {
+                            setToppings([...toppings, item]);
+                            setToppingsPrice(toppingsPrice + 60);
+                          }}
+                        >
+                          ADD
+                        </div>
+                      )}
+                      {toppings.includes(item) && (
+                        <div
+                          className="remove-topping-btn"
+                          onClick={() => {
+                            setToppings(toppings.filter((x) => x !== item));
+                            setToppingsPrice(toppingsPrice - 60);
+                          }}
+                        >
+                          REMOVE
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            <div className="toppings-box">
+              <div className="toppings-header">
+                <img
+                  src="https://pizzaonline.dominos.co.in/static/assets/icons/non_veg.svg"
+                  alt="veg"
+                />
+                <div className="toppings-title">
+                  Add Non-Veg Toppings @ ₹75.00 each
+                </div>
+              </div>
+
+              <div className="toppings-body">
+                {dominosToppings
+                  .filter((x) => x.is_veg !== true)
+                  .map((item, index) => (
+                    <div key={index} className="toppings-item-box">
+                      <img src={item.image_url} alt="" />
+                      <div className="topping-item-name">{item.name}</div>
+                      {!toppings.includes(item) && (
+                        <div
+                          className="add-topping-btn"
+                          onClick={() => {
+                            setToppings([...toppings, item]);
+                            setToppingsPrice(toppingsPrice + 75);
+                          }}
+                        >
+                          ADD
+                        </div>
+                      )}
+                      {toppings.includes(item) && (
+                        <div
+                          className="remove-topping-btn"
+                          onClick={() => {
+                            setToppings(toppings.filter((x) => x !== item));
+                            setToppingsPrice(toppingsPrice - 75);
+                          }}
+                        >
+                          REMOVE
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="item-details-footer">
+          <div className="final-item-details">
+            <div className="final-item-count">1 Item</div>
+            <div className="final-item-price">₹{price + toppingsPrice}</div>
+          </div>
+          <div className="item-add-to-cart">ADD TO CART</div>
         </div>
       </div>
     </div>

@@ -1,0 +1,22 @@
+.user-nav {
+    position: fixed;
+    top: 45px;
+    left: 0;
+    height: calc(100vh - 45px);
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.601);
+    z-index: 100000000;
+    display: flex;
+    justify-content: flex-end;
+}
+.user-nav-sidebar {
+    height: 100%;
+    width: 100%;
+    max-width: 480px;
+    background-color: #e9edef;
+    position: relative;
+    right: -500px;
+    transition: all 0.8s;
+    padding: 0px 20px;
+    box-shadow: -8px 8px 15px black;
+}

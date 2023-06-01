@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import Login from "../login/Login";
 import { useSelector } from "react-redux";
+import UserNav from "../user_nav/UserNav";
 
 export default function Navbar() {
   const [openLogin, setOpenLogin] = useState(false);
+  const [openUserNav, setOpenUserNav] = useState(false);
 
   const user_loggedin = useSelector((state) => state.auth.user_loggedin);
   const user = useSelector((state) => state.auth.user);
@@ -48,6 +50,7 @@ export default function Navbar() {
       )}
 
       {openLogin && <Login setOpenLogin={setOpenLogin} />}
+      {openUserNav && <UserNav setOpenUserNav={setOpenUserNav} />}
     </div>
   );
 }

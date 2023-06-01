@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PizzaCard.css";
 import Customize from "../../customize/Customize";
+import { addItemToCart } from "../../../api";
 
 export default function PizzaCard({
   item,
@@ -49,7 +50,9 @@ export default function PizzaCard({
   const [price, setPrice] = useState(
     item.size[size].filter((x) => x.crust === crust)[0].price
   );
-  // console.log(item.size);
+  const [addExtraCheese, setAddExtraCheese] = useState(false);
+  const [toppings, setToppings] = useState([]);
+  const [toppingsPrice, setToppingsPrice] = useState(0);
 
   const [sizeDd, setSizeDd] = useState(false);
   const [crustDd, setCrustDd] = useState(false);
@@ -68,10 +71,19 @@ export default function PizzaCard({
     }
   };
 
-  const addItem = () => {
+  const addItem = async () => {
     setItemCount(1);
     document.getElementById(`${id}-atc-btn`).style.display = "none";
     document.getElementById(`${id}-counter`).style.display = "flex";
+
+    const res = await addItemToCart({
+      item_id: item._id,
+      size: size,
+      crust: crust,
+      price: price,
+      qty: 1,
+    });
+    console.log(res);
   };
 
   useEffect(() => {
@@ -98,7 +110,7 @@ export default function PizzaCard({
             alt=""
           />
         </div>
-        <div className="price">₹ {price}</div>
+        <div className="price">₹ {price + toppingsPrice}</div>
         <div
           className="customize"
           onClick={() => {
@@ -242,6 +254,13 @@ export default function PizzaCard({
           setCrust={setCrust}
           sizes={sizes}
           crusts={crusts}
+          price={price}
+          addExtraCheese={addExtraCheese}
+          setAddExtraCheese={setAddExtraCheese}
+          toppings={toppings}
+          setToppings={setToppings}
+          toppingsPrice={toppingsPrice}
+          setToppingsPrice={setToppingsPrice}
         />
       )}
     </div>

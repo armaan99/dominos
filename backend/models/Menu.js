@@ -26,6 +26,13 @@ const mania = mongoose.Schema({
   size: { type: Object },
 });
 
+const toppings = mongoose.Schema({
+  name: { type: String, require: true },
+  image_url: { type: String, required: true },
+  price: { type: Number, required: true },
+  is_veg: { type: Boolean, required: true },
+});
+
 mongoose.pluralize(null);
 
 const PizzaModel = mongoose.model("menu_pizza", pizza);
@@ -35,6 +42,7 @@ const ChickenModel = mongoose.model("menu_chicken", sides);
 const CombosModel = mongoose.model("menu_combos", sides);
 const ManiaModel = mongoose.model("menu_mania", mania);
 const SidesModel = mongoose.model("menu_sides", sides);
+const ToppingsModel = mongoose.model("menu_toppings", toppings);
 
 module.exports = {
   PizzaModel,
@@ -44,4 +52,5 @@ module.exports = {
   CombosModel,
   ManiaModel,
   SidesModel,
+  ToppingsModel,
 };
