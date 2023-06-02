@@ -15,10 +15,9 @@
     max-width: 480px;
     background-color: #e9edef;
     position: relative;
-    right: -500px;
+    right: -550px;
     transition: all 0.8s;
     padding: 0px 20px;
-    box-shadow: -8px 8px 15px black;
 }
 .login-back-btn {
     position: absolute;

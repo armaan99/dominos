@@ -4,7 +4,6 @@ const { GetIdFromToken } = require("./GetIdFromToken");
 async function addItemToCart(req, res) {
   const token = req.params.token;
   const userId = await GetIdFromToken(token);
-  console.log(token, userId);
 
   if (userId) {
     const cartItem = new CartModel(req.body);
@@ -18,4 +17,19 @@ async function addItemToCart(req, res) {
   }
 }
 
-module.exports = { addItemToCart };
+async function fetchCartItem(req, res) {
+  const token = req.params.token;
+  const userId = await GetIdFromToken(token);
+  if (userId) {
+    const user = await UserModel.findById({ _id: userId });
+    res.send({
+      success: true,
+      message: "Cart Items Fetched Successfully",
+      cart: user.cart,
+    });
+  } else {
+    res.send({ success: false, message: "User not found" });
+  }
+}
+
+module.exports = { addItemToCart, fetchCartItem };

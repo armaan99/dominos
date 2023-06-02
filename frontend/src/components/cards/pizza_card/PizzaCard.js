@@ -82,12 +82,16 @@ export default function PizzaCard({
       crust: crust,
       price: price,
       qty: 1,
+      extra_cheese: addExtraCheese,
+      toppings: toppings,
     });
   };
 
   useEffect(() => {
-    setPrice(item.size[size].filter((x) => x.crust === crust)[0].price);
-  }, [size, crust]);
+    setPrice(
+      item.size[size].filter((x) => x.crust === crust)[0].price + toppingsPrice
+    );
+  }, [size, crust, toppings, addExtraCheese]);
 
   return (
     <div
@@ -98,7 +102,7 @@ export default function PizzaCard({
       }}
     >
       <div className="item-img">
-        <img src={item.image_url} alt="Pizza Image" />
+        <img className="card-item-img" src={item.image_url} alt="Pizza Image" />
         <div className="veg-nonveg">
           <img
             src={
@@ -109,7 +113,7 @@ export default function PizzaCard({
             alt=""
           />
         </div>
-        <div className="price">₹ {price + toppingsPrice}</div>
+        <div className="price">₹ {price}</div>
         <div
           className="customize"
           onClick={() => {
@@ -260,6 +264,7 @@ export default function PizzaCard({
           setToppings={setToppings}
           toppingsPrice={toppingsPrice}
           setToppingsPrice={setToppingsPrice}
+          addItem={addItem}
         />
       )}
     </div>

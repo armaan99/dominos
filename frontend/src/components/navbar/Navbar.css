@@ -16,6 +16,13 @@
 .nav-logo:hover {
     cursor: pointer;
 }
+.cart img {
+    height: 25px;
+    margin-right: 25px;
+}
+.cart:hover {
+    cursor: pointer;
+}
 .account {
     display: flex;
     align-items: center;

@@ -62,7 +62,6 @@ export default function Login({ setOpenLogin }) {
     if (res.success) {
       localStorage.setItem("dominos_token", res.token);
       dispatch(updateUserData(res.user));
-      console.log(res);
     } else {
       window.alert(res.message);
     }
@@ -74,7 +73,7 @@ export default function Login({ setOpenLogin }) {
       className="login-page"
       onClick={(e) => {
         if (e.target.className === "login-page") {
-          document.querySelector(".login-sidebar").style.right = "-500px";
+          document.querySelector(".login-sidebar").style.right = "-550px";
           setTimeout(() => {
             setOpenLogin(false);
           }, 800);
@@ -85,7 +84,7 @@ export default function Login({ setOpenLogin }) {
         <div
           className="login-back-btn"
           onClick={() => {
-            document.querySelector(".login-sidebar").style.right = "-500px";
+            document.querySelector(".login-sidebar").style.right = "-550px";
             setTimeout(() => {
               setOpenLogin(false);
             }, 800);

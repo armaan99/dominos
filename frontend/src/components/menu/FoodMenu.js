@@ -3,7 +3,9 @@ import "./FoodMenu.css";
 import PizzaCard from "../cards/pizza_card/PizzaCard";
 import SidesCard from "../cards/sides_card/SidesCard";
 import ManiaCard from "../cards/mania_card/ManiaCard";
-import { fetchMenuItems } from "../../api";
+import { fetchMenuItems, fetchToppings } from "../../api";
+import { useDispatch } from "react-redux";
+import { updateMenuData, updateToppings } from "../../redux/actions/MenuAction";
 
 export default function FoodMenu() {
   const [menu, setMenu] = useState({
@@ -18,11 +20,20 @@ export default function FoodMenu() {
 
   useEffect(() => {
     fetchMenu();
+    getToppings();
   }, []);
+
+  const dispatch = useDispatch();
 
   async function fetchMenu() {
     const res = await fetchMenuItems();
     setMenu(res.data);
+    dispatch(updateMenuData(res.data));
+  }
+
+  async function getToppings() {
+    const res = await fetchToppings();
+    dispatch(updateToppings(res.data));
   }
 
   const category = [

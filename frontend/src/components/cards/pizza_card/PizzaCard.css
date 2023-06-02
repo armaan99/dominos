@@ -3,6 +3,7 @@
     width: 100%;
     box-shadow: 5px 5px 5px rgb(191 191 191);
     background-color: white;
+    border-radius: 10px;
 }
 .item-img {
     position: relative;
@@ -11,10 +12,13 @@
     width: 100%;
     z-index: 0;
 }
+.card-item-img {
+    border-radius: 10px 10px 0 0;
+}
 .veg-nonveg {
     position: absolute;
     top: 10px;
-    left: 5px;
+    left: 15px;
 }
 .price {
     color: white;
@@ -23,13 +27,13 @@
     font-size: large;
     position: absolute;
     bottom: 10px;
-    left: 5px;
+    left: 15px;
 }
 .customize {
     color: black;
     font-size: x-small;
     position: absolute;
-    right: 20px;
+    right: 15px;
     bottom: 10px;
     background-color: white;
     padding: 5px 8px;
@@ -129,8 +133,6 @@
     display: flex;
     justify-content: end;
     margin-top: 30px;
-}
-.add-to-cart:hover {
     cursor: pointer;
 }
 .add-to-cart-btn {
@@ -139,6 +141,8 @@
     font-size: 12px;
     border: 1px solid rgb(0, 171, 0);
     width: fit-content;
+    /* text-align: center; */
+    /* width: 100%; */
     height: fit-content;
     padding: 10px 5px;
     border-radius: 5px;
