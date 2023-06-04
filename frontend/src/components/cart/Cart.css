@@ -131,3 +131,20 @@
     padding: 5px 20px;
     cursor: pointer;
 }
+.empty-cart {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+.empty-cart-img {
+    height: 20%;
+}
+.empty-cart-label {
+    color: #0066A7;
+    font-size: xx-large;
+    font-weight: bolder;
+}

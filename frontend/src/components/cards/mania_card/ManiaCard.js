@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { addItemToCart, updateCartItem } from "../../../api";
+import { updateCart } from "../../../redux/actions/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ManiaCard({ item, id }) {
   const sizes = [
@@ -26,29 +29,53 @@ export default function ManiaCard({ item, id }) {
   const [sizeDd, setSizeDd] = useState(false);
   const [crustDd, setCrustDd] = useState(false);
 
-  const [itemCount, setItemCount] = useState(0);
-
-  const handleIncreaseItem = () => {
-    setItemCount(itemCount + 1);
-  };
-
-  const handleDecreaseItem = () => {
-    setItemCount(itemCount - 1);
-    if (itemCount === 1) {
-      document.getElementById(`${id}-atc-btn`).style.display = "flex";
-      document.getElementById(`${id}-counter`).style.display = "none";
+  const handleIncreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty + 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
     }
   };
 
-  const addItem = () => {
-    setItemCount(1);
-    document.getElementById(`${id}-atc-btn`).style.display = "none";
-    document.getElementById(`${id}-counter`).style.display = "flex";
+  const handleDecreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty - 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
+    }
+  };
+
+  const dispatch = useDispatch();
+
+  const user_loggedin = useSelector((state) => state.auth.user_loggedin);
+
+  const addItem = async () => {
+    if (user_loggedin) {
+      const res = await addItemToCart({
+        item_id: item._id,
+        size: size,
+        crust: crust,
+        price: price,
+        qty: 1,
+      });
+
+      if (res.success) {
+        dispatch(updateCart(res.cart));
+      }
+    } else {
+      window.alert("Please login first");
+    }
   };
 
   useEffect(() => {
     setPrice(item.size[size].filter((x) => x.crust === crust)[0].price);
   }, [size, crust]);
+
+  const cart = useSelector((state) => state.cart.cart);
+
+  const [itemInCart, setItemInCart] = useState();
+
+  useEffect(() => {
+    setItemInCart(cart.filter((x) => x.item_id === item._id)[0]);
+  }, [cart]);
 
   return (
     <div
@@ -59,7 +86,7 @@ export default function ManiaCard({ item, id }) {
       }}
     >
       <div className="item-img">
-        <img src={item.image_url} alt="Pizza Image" />
+        <img className="card-item-img" src={item.image_url} alt="Pizza Image" />
         <div className="veg-nonveg">
           <img
             src={
@@ -87,13 +114,15 @@ export default function ManiaCard({ item, id }) {
             <div className="dropdown-selector">
               <div className="text">{size}</div>
               <div>
-                <img
-                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
-                  alt="Arrow"
-                />
+                {!itemInCart && (
+                  <img
+                    src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
+                    alt="Arrow"
+                  />
+                )}
               </div>
             </div>
-            {sizeDd && (
+            {sizeDd && !itemInCart && (
               <div className="dropdown-body">
                 {sizes.map((pizzaSize, index) => (
                   <div
@@ -132,12 +161,14 @@ export default function ManiaCard({ item, id }) {
             <div className="dropdown-selector">
               <div className="text">{crust}</div>
               <div>
-                <img
-                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
-                  alt="Arrow"
-                />
+                {!itemInCart && (
+                  <img
+                    src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
+                    alt="Arrow"
+                  />
+                )}
               </div>
-              {crustDd && (
+              {crustDd && !itemInCart && (
                 <div className="dropdown-body">
                   {crusts.map((pizzaCrust, index) => (
                     <div
@@ -164,32 +195,32 @@ export default function ManiaCard({ item, id }) {
             </div>
           </div>
         </div>
-        <div className="add-to-cart" id={`${id}-atc-btn`}>
-          <div className="add-to-cart-btn" onClick={addItem}>
-            Add to Cart
-          </div>
-        </div>
-        <div
-          className="item-counter"
-          id={`${id}-counter`}
-          style={{ display: "none" }}
-        >
-          <div className="item-count-manage-box">
-            <div className="dec-item" onClick={handleDecreaseItem}>
-              <img
-                src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
-                alt="-"
-              />
-            </div>
-            <div className="item-count">{itemCount}</div>
-            <div className="inc-item" onClick={handleIncreaseItem}>
-              <img
-                src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
-                alt="+"
-              />
+        {!itemInCart ? (
+          <div className="add-to-cart">
+            <div className="add-to-cart-btn" onClick={addItem}>
+              Add to Cart
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="item-counter">
+            <div />
+            <div className="item-count-manage-box">
+              <div className="dec-item" onClick={handleDecreaseItem}>
+                <img
+                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
+                  alt="-"
+                />
+              </div>
+              <div className="item-count">{itemInCart.qty}</div>
+              <div className="inc-item" onClick={handleIncreaseItem}>
+                <img
+                  src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
+                  alt="+"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

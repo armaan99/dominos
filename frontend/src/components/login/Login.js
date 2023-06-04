@@ -68,28 +68,22 @@ export default function Login({ setOpenLogin }) {
     setLoading(false);
   }
 
+  function handleClose() {
+    document.querySelector(".login-sidebar").style.right = "-550px";
+    setTimeout(() => {
+      setOpenLogin(false);
+    }, 800);
+  }
+
   return (
     <div
       className="login-page"
       onClick={(e) => {
-        if (e.target.className === "login-page") {
-          document.querySelector(".login-sidebar").style.right = "-550px";
-          setTimeout(() => {
-            setOpenLogin(false);
-          }, 800);
-        }
+        e.target.className === "login-page" && handleClose();
       }}
     >
       <div className="login-sidebar">
-        <div
-          className="login-back-btn"
-          onClick={() => {
-            document.querySelector(".login-sidebar").style.right = "-550px";
-            setTimeout(() => {
-              setOpenLogin(false);
-            }, 800);
-          }}
-        >
+        <div className="login-back-btn" onClick={() => handleClose()}>
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZklEQVR4nO2aO0oEQRCGfx93EjNPICarBgY+pmvRhUUUQRCZA4gIxiImXTV6CXNj9QKmGmnmY8RZhEVQu7Oan/mgskk+qqcfVQV0dPyN6ACiTxC9h8RZtBqxHYjVY/GCvs2BRKZur5To7i8yowj6DNEZtDwzP0Jv4B7R7TSZJkt3cI3oEKIfidl5Q9B5uEVMkmWCvUN0BW4pNGRk5us7AZHMJtwisRgtn1QZHcAtfdtIl2liD24Jup4psw8amWAHcItUa5mZOYRbClvNk9Ej0MgEPYZbQrXcXFPS/5kTuEVsCUFfM2ROgXoCLil0MU9Gz5hkzlGWk3CJVL0sGbELxzJxIU9GI3pXU3CL2ENGZi5RXk/DNUInFMmWHN2mQLltUx6slFcfyssp5fOB8oFH+QSnLJJQlrEoC42UpWDKYj1lO4Wy4UXZkqRsGlO29SkHLyhHYyiHl74JcQvBHiF22/7xsg78yyf7rGEiZsnwHwAAAABJRU5ErkJggg==" />
         </div>
         <img
@@ -118,9 +112,10 @@ export default function Login({ setOpenLogin }) {
 
         <form
           className="login-form"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            handleLogin();
+            await handleLogin();
+            handleClose();
           }}
         >
           <div className="login-form-title">Login with your valid Email Id</div>

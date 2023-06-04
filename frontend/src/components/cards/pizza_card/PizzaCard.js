@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./PizzaCard.css";
 import Customize from "../../customize/Customize";
-import { addItemToCart } from "../../../api";
+import { addItemToCart, updateCartItem } from "../../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../../../redux/actions/cartAction";
 
 export default function PizzaCard({
   item,
@@ -57,34 +59,42 @@ export default function PizzaCard({
   const [sizeDd, setSizeDd] = useState(false);
   const [crustDd, setCrustDd] = useState(false);
 
-  const [itemCount, setItemCount] = useState(0);
-
-  const handleIncreaseItem = () => {
-    setItemCount(itemCount + 1);
-  };
-
-  const handleDecreaseItem = () => {
-    setItemCount(itemCount - 1);
-    if (itemCount === 1) {
-      document.getElementById(`${id}-atc-btn`).style.display = "flex";
-      document.getElementById(`${id}-counter`).style.display = "none";
+  const handleIncreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty + 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
     }
   };
 
-  const addItem = async () => {
-    setItemCount(1);
-    document.getElementById(`${id}-atc-btn`).style.display = "none";
-    document.getElementById(`${id}-counter`).style.display = "flex";
+  const handleDecreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty - 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
+    }
+  };
 
-    const res = await addItemToCart({
-      item_id: item._id,
-      size: size,
-      crust: crust,
-      price: price,
-      qty: 1,
-      extra_cheese: addExtraCheese,
-      toppings: toppings,
-    });
+  const dispatch = useDispatch();
+
+  const user_loggedin = useSelector((state) => state.auth.user_loggedin);
+
+  const addItem = async () => {
+    if (user_loggedin) {
+      const res = await addItemToCart({
+        item_id: item._id,
+        size: size,
+        crust: crust,
+        price: price,
+        qty: 1,
+        extra_cheese: addExtraCheese,
+        toppings: toppings,
+      });
+
+      if (res.success) {
+        dispatch(updateCart(res.cart));
+      }
+    } else {
+      window.alert("Please login first");
+    }
   };
 
   useEffect(() => {
@@ -92,6 +102,14 @@ export default function PizzaCard({
       item.size[size].filter((x) => x.crust === crust)[0].price + toppingsPrice
     );
   }, [size, crust, toppings, addExtraCheese]);
+
+  const cart = useSelector((state) => state.cart.cart);
+
+  const [itemInCart, setItemInCart] = useState();
+
+  useEffect(() => {
+    setItemInCart(cart.filter((x) => x.item_id === item._id)[0]);
+  }, [cart]);
 
   return (
     <div
@@ -114,18 +132,20 @@ export default function PizzaCard({
           />
         </div>
         <div className="price">₹ {price}</div>
-        <div
-          className="customize"
-          onClick={() => {
-            setOpenCustomization(id);
-          }}
-        >
-          CUSTOMIZE
-          <img
-            src="https://pizzaonline.dominos.co.in/static/assets/icons/customise_arrow.svg"
-            alt=""
-          />
-        </div>
+        {!itemInCart && (
+          <div
+            className="customize"
+            onClick={() => {
+              setOpenCustomization(id);
+            }}
+          >
+            CUSTOMIZE
+            <img
+              src="https://pizzaonline.dominos.co.in/static/assets/icons/customise_arrow.svg"
+              alt=""
+            />
+          </div>
+        )}
       </div>
       <div className="item-detail">
         <div className="title">{item.name}</div>
@@ -142,13 +162,15 @@ export default function PizzaCard({
             <div className="dropdown-selector">
               <div className="text">{size}</div>
               <div>
-                <img
-                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
-                  alt="Arrow"
-                />
+                {!itemInCart && (
+                  <img
+                    src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
+                    alt="Arrow"
+                  />
+                )}
               </div>
             </div>
-            {sizeDd && (
+            {sizeDd && !itemInCart && (
               <div className="dropdown-body">
                 {sizes.map((pizzaSize, index) => (
                   <div
@@ -187,12 +209,14 @@ export default function PizzaCard({
             <div className="dropdown-selector">
               <div className="text">{crust}</div>
               <div>
-                <img
-                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
-                  alt="Arrow"
-                />
+                {!itemInCart && (
+                  <img
+                    src="	https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg"
+                    alt="Arrow"
+                  />
+                )}
               </div>
-              {crustDd && (
+              {crustDd && !itemInCart && (
                 <div className="dropdown-body">
                   {crusts.map((pizzaCrust, index) => (
                     <div
@@ -219,32 +243,37 @@ export default function PizzaCard({
             </div>
           </div>
         </div>
-        <div className="add-to-cart" id={`${id}-atc-btn`}>
-          <div className="add-to-cart-btn" onClick={addItem}>
-            Add to Cart
-          </div>
-        </div>
-        <div
-          className="item-counter"
-          id={`${id}-counter`}
-          style={{ display: "none" }}
-        >
-          <div className="item-count-manage-box">
-            <div className="dec-item" onClick={handleDecreaseItem}>
-              <img
-                src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
-                alt="-"
-              />
-            </div>
-            <div className="item-count">{itemCount}</div>
-            <div className="inc-item" onClick={handleIncreaseItem}>
-              <img
-                src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
-                alt="+"
-              />
+
+        {!itemInCart ? (
+          <div className="add-to-cart" id={`${id}-atc-btn`}>
+            <div className="add-to-cart-btn" onClick={addItem}>
+              Add to Cart
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="item-counter" id={`${id}-counter`}>
+            {itemInCart.extra_cheese || itemInCart.toppings.length > 0 ? (
+              <div className="customized-boolean">CUSTOMIZED</div>
+            ) : (
+              <div />
+            )}
+            <div className="item-count-manage-box">
+              <div className="dec-item" onClick={handleDecreaseItem}>
+                <img
+                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
+                  alt="-"
+                />
+              </div>
+              <div className="item-count">{itemInCart.qty}</div>
+              <div className="inc-item" onClick={handleIncreaseItem}>
+                <img
+                  src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
+                  alt="+"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {openCustomization === id && (

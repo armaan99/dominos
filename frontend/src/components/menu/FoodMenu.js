@@ -3,9 +3,10 @@ import "./FoodMenu.css";
 import PizzaCard from "../cards/pizza_card/PizzaCard";
 import SidesCard from "../cards/sides_card/SidesCard";
 import ManiaCard from "../cards/mania_card/ManiaCard";
-import { fetchMenuItems, fetchToppings } from "../../api";
-import { useDispatch } from "react-redux";
+import { fetchCartItems, fetchMenuItems, fetchToppings } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
 import { updateMenuData, updateToppings } from "../../redux/actions/MenuAction";
+import { updateCart } from "../../redux/actions/cartAction";
 
 export default function FoodMenu() {
   const [menu, setMenu] = useState({
@@ -21,6 +22,7 @@ export default function FoodMenu() {
   useEffect(() => {
     fetchMenu();
     getToppings();
+    fetchCart();
   }, []);
 
   const dispatch = useDispatch();
@@ -90,6 +92,15 @@ export default function FoodMenu() {
   ];
 
   const [openCustomization, setOpenCustomization] = useState(false);
+
+  const cart = useSelector((state) => state.cart.cart);
+
+  async function fetchCart() {
+    const res = await fetchCartItems();
+    if (res.success) {
+      dispatch(updateCart(res.cart));
+    }
+  }
 
   return (
     <div className="food-menu">

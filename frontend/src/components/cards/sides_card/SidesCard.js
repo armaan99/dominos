@@ -1,34 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { addItemToCart, updateCartItem } from "../../../api";
+import { updateCart } from "../../../redux/actions/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SidesCard({ item, id }) {
-  const [itemCount, setItemCount] = useState(0);
-
-  const handleIncreaseItem = () => {
-    setItemCount(itemCount + 1);
-  };
-
-  const handleDecreaseItem = () => {
-    setItemCount(itemCount - 1);
-    if (itemCount === 1) {
-      document.getElementById(`${id}-atc-btn`).style.display = "flex";
-      document.getElementById(`${id}-counter`).style.display = "none";
+  const handleIncreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty + 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
     }
   };
 
-  const addItem = () => {
-    setItemCount(1);
-    document.getElementById(`${id}-atc-btn`).style.display = "none";
-    document.getElementById(`${id}-counter`).style.display = "flex";
+  const handleDecreaseItem = async () => {
+    const res = await updateCartItem(itemInCart.qty - 1, itemInCart._id);
+    if (res.success) {
+      dispatch(updateCart(res.cart));
+    }
   };
+
+  const dispatch = useDispatch();
+
+  const user_loggedin = useSelector((state) => state.auth.user_loggedin);
+
+  const addItem = async () => {
+    if (user_loggedin) {
+      const res = await addItemToCart({
+        item_id: item._id,
+        price: item.price,
+        qty: 1,
+      });
+
+      if (res.success) {
+        dispatch(updateCart(res.cart));
+      }
+    } else {
+      window.alert("Please login first");
+    }
+  };
+
+  const cart = useSelector((state) => state.cart.cart);
+
+  const [itemInCart, setItemInCart] = useState();
+
+  useEffect(() => {
+    setItemInCart(cart.filter((x) => x.item_id === item._id)[0]);
+  }, [cart]);
 
   return (
     <div className="item-card">
       <div className="item-img">
-        <img
-          //   src="	https://images.dominos.co.in/Stuffed_garlic_Bread.png"
-          src={item.image_url}
-          alt="Sides Image"
-        />
+        <img className="card-item-img" src={item.image_url} alt="Sides Image" />
         <div className="veg-nonveg">
           <img
             src={
@@ -45,32 +66,32 @@ export default function SidesCard({ item, id }) {
         <div className="title">{item.name}</div>
         <div className="description">{item.desc}</div>
 
-        <div className="add-to-cart" id={`${id}-atc-btn`}>
-          <div className="add-to-cart-btn" onClick={addItem}>
-            Add to Cart
-          </div>
-        </div>
-        <div
-          className="item-counter"
-          id={`${id}-counter`}
-          style={{ display: "none" }}
-        >
-          <div className="item-count-manage-box">
-            <div className="dec-item" onClick={handleDecreaseItem}>
-              <img
-                src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
-                alt="-"
-              />
-            </div>
-            <div className="item-count">{itemCount}</div>
-            <div className="inc-item" onClick={handleIncreaseItem}>
-              <img
-                src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
-                alt="+"
-              />
+        {!itemInCart ? (
+          <div className="add-to-cart">
+            <div className="add-to-cart-btn" onClick={addItem}>
+              Add to Cart
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="item-counter">
+            <div />
+            <div className="item-count-manage-box">
+              <div className="dec-item" onClick={handleDecreaseItem}>
+                <img
+                  src="	https://pizzaonline.dominos.co.in/static/assets/icons/minus.svg"
+                  alt="-"
+                />
+              </div>
+              <div className="item-count">{itemInCart.qty}</div>
+              <div className="inc-item" onClick={handleIncreaseItem}>
+                <img
+                  src="https://pizzaonline.dominos.co.in/static/assets/icons/plus.svg"
+                  alt="+"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -66,3 +66,16 @@ export async function fetchCartItems() {
     console.log(err);
   }
 }
+
+export async function updateCartItem(qty, cartItemId) {
+  try {
+    const token = localStorage.getItem("dominos_token");
+    const res = await axios.put(CART_URL + token, {
+      qty: qty,
+      cartItemId: cartItemId,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
