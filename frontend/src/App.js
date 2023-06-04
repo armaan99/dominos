@@ -9,6 +9,10 @@ import { validateToken } from "./api";
 import { useDispatch } from "react-redux";
 import { updateUserData } from "./redux/actions/UserAction";
 
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import TrackOrder from "./components/trackOrder/TrackOrder";
+import OrderHistory from "./components/orderHistory/OrderHistory";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -30,9 +34,24 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <Navigations />
-      <FoodMenu />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Navigations />
+                <FoodMenu />
+              </>
+            }
+          ></Route>
+          <Route exact path="/trackorder" element={<TrackOrder />}></Route>
+          <Route exact path="/orderhistory" element={<OrderHistory />}></Route>
+          <Route path="*" element={<Navigate to="/" />}></Route>
+        </Routes>
+      </BrowserRouter>
       {/* <Theme /> */}
       <Footer />
     </div>

@@ -40,7 +40,7 @@ export default function FoodMenu() {
 
   const category = [
     {
-      title: "BESTSELLER",
+      title: "BESTSELLERS",
       data: menu.pizza.filter((x) => x.is_bestseller === true),
       type: "dominos_pizza",
     },
@@ -93,8 +93,6 @@ export default function FoodMenu() {
 
   const [openCustomization, setOpenCustomization] = useState(false);
 
-  const cart = useSelector((state) => state.cart.cart);
-
   async function fetchCart() {
     const res = await fetchCartItems();
     if (res.success) {
@@ -105,7 +103,7 @@ export default function FoodMenu() {
   return (
     <div className="food-menu">
       {category.map((cat, index) => (
-        <div key={index} className="food-category">
+        <div key={index} className="food-category" id={cat.title}>
           <Title title={cat.title} />
           <div className="food-category-body">
             {cat.data.map((item, index) =>

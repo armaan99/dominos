@@ -50,12 +50,11 @@ export default function Theme() {
       </div>
       <div className="theme-right">
         <img
-          className="google"
+          className="img-poster"
           src="https://api.dominos.co.in/prod-olo-api/images/flashBanner/dominos_adaptation_desktop.jpg"
           alt="Everyday Value"
         />
         <img
-          className="apple"
           src="https://api.dominos.co.in/prod-olo-api/images/flashBanner/Dominos_Howzzat_IPL-2021_Pizza_Online.jpg"
           alt="IPL Offer"
         />

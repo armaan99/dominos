@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     background-color: rgb(242 242 242);
+    padding-top: 45px;
 }
 .theme-left {
     flex: 1;
@@ -104,6 +105,6 @@ input[type='radio'] {
 .theme-right img {
     width: 100%;
 }
-.google {
+.img-poster {
     margin-bottom: 5px;
 }

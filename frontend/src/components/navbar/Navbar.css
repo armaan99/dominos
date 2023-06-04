@@ -16,6 +16,24 @@
 .nav-logo:hover {
     cursor: pointer;
 }
+.cart {
+    position: relative;
+}
+.cart-bubble{
+    font-size: 10px;
+    height: 15px;
+    width: auto;
+    padding: 0px 5px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    left: 15px;
+    top: -5px;
+    color: white;
+    text-align: center;
+    line-height: 15px;
+    font-weight: 600;
+}
 .cart img {
     height: 25px;
     margin-right: 25px;
@@ -46,4 +64,21 @@
 .login {
     font-size: 10px;
     color: rgb(84 202 246);
+}
+@media only screen and (max-width: 550px) {
+    .nav-logo {
+        margin-left: 20px;
+    }
+    .cart img {
+        height: 22px;
+    }
+    .account {
+        margin-right: 20px;
+    }
+    .account img {
+        height: 22px;
+    }
+    .account-content {
+        display: none;
+    }
 }

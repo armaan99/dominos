@@ -6,3 +6,11 @@ export function updateUserData(user) {
     });
   };
 }
+
+export function userLogout() {
+  return async function (dispatch) {
+    dispatch({
+      type: "USER_LOGOUT",
+    });
+  };
+}

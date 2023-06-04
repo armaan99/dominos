@@ -32,17 +32,17 @@
     font-size: 25px;
     transition: all 0.8s;
 }
-.cart-sidebar-body {
-    padding: 0px 10px;
-    height: calc(100% - 100px);
-    overflow: scroll;
-}
 .cart-sidebar-head img {
     position: absolute;
     left: 10px;
     transform: rotate(180deg);
     height: 20px;
     cursor: pointer;
+}
+.cart-sidebar-body {
+    padding: 0px 10px;
+    height: calc(100% - 100px);
+    overflow: scroll;
 }
 .cart-item-card{
     padding: 10px;

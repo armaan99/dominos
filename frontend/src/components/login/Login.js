@@ -3,6 +3,7 @@ import "./Login.css";
 import { login } from "../../api";
 import { useDispatch } from "react-redux";
 import { updateUserData } from "../../redux/actions/UserAction";
+import { updateCart } from "../../redux/actions/cartAction";
 
 export default function Login({ setOpenLogin }) {
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function Login({ setOpenLogin }) {
     if (res.success) {
       localStorage.setItem("dominos_token", res.token);
       dispatch(updateUserData(res.user));
+      dispatch(updateCart(res.user.cart));
     } else {
       window.alert(res.message);
     }

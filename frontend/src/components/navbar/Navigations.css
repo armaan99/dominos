@@ -1,8 +1,8 @@
 .navigations {
     width: 96%;
-    height: auto;
+    height: 40px;
     color: rgb(180 191 196);
-    padding: 12px 2%;
+    padding: 0px 2%;
     box-shadow: 0px 5px 5px rgb(211 222 233);
     margin-bottom: 5px;
     position: fixed;
@@ -12,14 +12,23 @@
     overflow: scroll;
 }
 .navigators {   
+    
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     gap: 30px;
 }
-.navigators div {
+.navigators a {
     font-size: small;
     font-weight: bold;
+    cursor: pointer;
+    height: 35px;
+    line-height: 35px;
+}
+.active {
+    color: rgb(0 102 167);
+    border-bottom: 5px solid rgb(0, 171, 0);
 }
 @media only screen and (max-width: 1024px) {
     .navigators {

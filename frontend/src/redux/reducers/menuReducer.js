@@ -1,4 +1,20 @@
-const menu = (state = { menu: [], toppings: [] }, action) => {
+const menu = (
+  state = {
+    menu: [
+      {
+        pizza: [],
+        beverages: [],
+        sides: [],
+        chicken: [],
+        mania: [],
+        combos: [],
+        dessert: [],
+      },
+    ],
+    toppings: [],
+  },
+  action
+) => {
   if (action.type === "UPDATE_MENU") {
     state = { ...state, menu: action.payload };
   } else if (action.type === "UPDATE_TOPPINGS") {

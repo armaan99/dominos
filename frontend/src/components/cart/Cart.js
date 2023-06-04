@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Cart.css";
-import { fetchCartItems, updateCartItem } from "../../api";
+import { updateCartItem } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "../../redux/actions/cartAction";
 

@@ -13,10 +13,54 @@
     height: 100%;
     width: 100%;
     max-width: 480px;
-    background-color: #e9edef;
+    background-color: white;
     position: relative;
     right: -500px;
     transition: all 0.8s;
-    padding: 0px 20px;
-    box-shadow: -8px 8px 15px black;
+}
+.user-nav-head {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    color: rgb(0 102 167);
+}
+.user-nav-head img {
+    position: absolute;
+    left: 10px;
+    transform: rotate(180deg);
+    height: 20px;
+    cursor: pointer;
+}
+.user-nav-body {
+    height: calc(100% - 135px);
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.nav-options-box {
+    height: 50px;
+    background-color: #e9edef;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+.logout-btn {
+    height: 50px;
+    background-color: #e9edef;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
 }
