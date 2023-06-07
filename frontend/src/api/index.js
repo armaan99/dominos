@@ -7,6 +7,7 @@ const VALIDATE_TOKEN_URL = BASE_URL + "/auth/validate_token";
 const MENU_URL = BASE_URL + "/menu";
 const TOPPINGS_URL = BASE_URL + "/toppings";
 const CART_URL = BASE_URL + "/cart/";
+const ADDRESS_URL = BASE_URL + "/user/address/";
 
 export async function login({ email, password }) {
   try {
@@ -73,6 +74,30 @@ export async function updateCartItem(qty, cartItemId) {
     const res = await axios.put(CART_URL + token, {
       qty: qty,
       cartItemId: cartItemId,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function updateAddress(address, city, state) {
+  try {
+    const token = localStorage.getItem("dominos_token");
+    const res = await axios.put(ADDRESS_URL + token, {
+      address: address,
+      city: city,
+      state: state,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function deleteAddress(addressId) {
+  try {
+    const token = localStorage.getItem("dominos_token");
+    const res = await axios.post(ADDRESS_URL + token, {
+      addressId: addressId,
     });
     return res.data;
   } catch (err) {

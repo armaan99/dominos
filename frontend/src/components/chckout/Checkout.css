@@ -1,0 +1,211 @@
+.checkout-pg {
+    background-color: rgb(242 242 242);
+    width: 80%;
+    padding: 100px 10% 50px;
+    display: flex;
+    gap: 50px;
+}
+.checkout-cart {
+    flex: 5;
+}
+.checkout-details {
+    flex: 2;
+}
+.checkout-cart-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+.checkout-cart-left {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+.checkout-item-img {
+    height: 150px;
+    transform: translate(-25%, 0);
+}
+.checkout-veg, .checkout-non-veg {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+.checkout-cart-right{
+    width: calc(100% - 150px);
+}
+.right-upper {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.checkout-item-title {
+    font-weight: 600;
+    font-size: 20px;
+    color: rgb(40 71 87);
+}
+.checkout-item-desc {
+    color: rgb(100 129 143);
+    max-width: 75%;
+    font-size: 14px;
+    padding: 8px 0px;
+}
+.checkout-size-crust {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(100 129 143);
+}
+.right-upper-right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}
+.checkout-price {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(44 101 128);
+}
+.right-lower {
+    padding-top: 15px;
+    border-top: 2px dotted rgb(100 129 143);
+    
+}
+.checkout-customization-text {
+    color: rgb(88 153 225);
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 5px;
+}
+.checkout-cartcustomization {
+    font-size: 15px;
+    color: rgb(85 104 115);
+}
+
+.price-details-head, .address-details-head{
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+.price-details-body,.address-details-body{
+    background-color: white;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+}
+.pdb-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.pdb-item-title{
+    font-weight: 600;
+}
+.pdb-item-value{
+    font-weight: 750;
+}
+.grand-total{
+    border-top: solid rgb(100, 129, 143, 0.5) 0.5px;
+    border-bottom: solid rgb(100, 129, 143, 0.5) 0.5px;
+    padding: 15px 0px;
+}
+.grand-total .pdb-item-title{
+    font-weight: 750;
+}
+.place-order-btn{
+    background-color: #1da81a;
+    color: white;
+    font-weight: 600;
+    font-size: large;
+    text-align: center;
+    padding: 10px 0px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+.address-details{
+    margin-bottom: 50px;
+}
+.new-address-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* display: none; */
+}
+.new-address-form input{
+    height: 35px;
+    font-size: large;
+}
+.new-address-form input:focus{
+    outline: none;
+}
+.new-address-form input[type = "submit"]{
+    height: auto;
+    background-color: #1da81a;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: large;
+    text-align: center;
+    padding: 10px 0px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+.address-title{
+    cursor: pointer;
+}
+.address-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: solid rgb(100, 129, 143, 0.5) 0.5px;
+    padding-bottom: 20px;
+}
+.address-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: rgb(132 132 132);
+    border: 2px solid transparent;
+}
+.address-item img{
+    flex: 1;
+}
+.address-item-text{
+    flex: 10;
+    font-size: small;
+    
+}
+.address-item:hover{
+    background-color: whitesmoke;
+}
+.delete-address-btn img{
+    flex: 1;
+    height: 20px;
+}
+.address-item-selected{ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid rgb(44 121 179);
+    color: rgb(45 120 179);
+    background-color: rgb(221 244 255);
+}
+.address-item-selected:hover{
+    background-color: rgb(221 244 255);
+}

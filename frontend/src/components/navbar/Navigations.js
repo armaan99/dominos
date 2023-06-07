@@ -25,7 +25,7 @@ export default function Navigations() {
   return (
     <div className="navigations">
       <div className="navigators">
-        <a id="BESTSELLERS1" href="#BESTSELLERS">
+        <a id="BESTSELLERS1" href="#BESTSELLERS" className="active">
           BESTSELLERS
         </a>
         <a id="NEW LAUNCHES1" href="#NEW%20LAUNCHES">

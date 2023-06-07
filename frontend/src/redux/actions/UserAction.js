@@ -14,3 +14,12 @@ export function userLogout() {
     });
   };
 }
+
+export function updateUserAddress(address) {
+  return async function (dispatch) {
+    dispatch({
+      type: "UPDATE_ADDRESS",
+      payload: address,
+    });
+  };
+}

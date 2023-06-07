@@ -3,6 +3,7 @@ import "./Cart.css";
 import { updateCartItem } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "../../redux/actions/cartAction";
+import { Link } from "react-router-dom";
 
 export default function Cart({ setOpenCart }) {
   const [subTotal, setSubTotal] = useState(0);
@@ -171,14 +172,15 @@ export default function Cart({ setOpenCart }) {
         {cart.length !== 0 && (
           <div className="cart-sidebar-foot">
             <div className="subtotal">Subtotal: ₹{subTotal}</div>
-            <div
+            <Link
+              to="/checkout"
               className="checkout"
               onClick={() => {
                 handleClose();
               }}
             >
               CHECKOUT
-            </div>
+            </Link>
           </div>
         )}
       </div>

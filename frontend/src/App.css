@@ -8,3 +8,9 @@ a{
 *{
     scroll-behavior: smooth;
 }
+body {
+    -webkit-user-select: none; /* Safari/Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}  

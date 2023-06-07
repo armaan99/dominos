@@ -10,8 +10,9 @@ import { useDispatch } from "react-redux";
 import { updateUserData } from "./redux/actions/UserAction";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import TrackOrder from "./components/trackOrder/TrackOrder";
-import OrderHistory from "./components/orderHistory/OrderHistory";
+import TrackOrder from "./components/track_order/TrackOrder";
+import OrderHistory from "./components/order_history/OrderHistory";
+import Checkout from "./components/chckout/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
               </>
             }
           ></Route>
+          <Route exact path="/checkout" element={<Checkout />}></Route>
           <Route exact path="/trackorder" element={<TrackOrder />}></Route>
           <Route exact path="/orderhistory" element={<OrderHistory />}></Route>
           <Route path="*" element={<Navigate to="/" />}></Route>
