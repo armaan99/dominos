@@ -47,7 +47,7 @@ async function verification(req, res) {
     const token = req.params.token;
     const userId = await GetIdFromToken(token);
     await UserModel.findByIdAndUpdate({ _id: userId }, { cart: [] });
-    res.redirect("http://localhost:3000/orderHistory");
+    res.redirect("/orderHistory");
   } else {
     res.send({ success: false, message: "payment failed" });
   }
