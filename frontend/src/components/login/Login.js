@@ -4,6 +4,7 @@ import { login } from "../../api";
 import { useDispatch } from "react-redux";
 import { updateUserData } from "../../redux/actions/UserAction";
 import { updateCart } from "../../redux/actions/cartAction";
+import getGoogleOAuthURL from "../../api/getGoogleUrl";
 
 export default function Login({ setOpenLogin }) {
   useEffect(() => {
@@ -156,10 +157,13 @@ export default function Login({ setOpenLogin }) {
         </form>
         <div className="login-form">
           <div className="login-form-title">Login with social account</div>
-          <div className="google-btn">
+          <a
+            // href={getGoogleOAuthURL()}
+            className="google-btn"
+          >
             <img src="https://pizzaonline.dominos.co.in/static/assets/icons/gmail.svg"></img>{" "}
             GOOGLE
-          </div>
+          </a>
         </div>
       </div>
     </div>

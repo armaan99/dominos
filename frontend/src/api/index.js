@@ -8,6 +8,8 @@ const MENU_URL = BASE_URL + "/menu";
 const TOPPINGS_URL = BASE_URL + "/toppings";
 const CART_URL = BASE_URL + "/cart/";
 const ADDRESS_URL = BASE_URL + "/user/address/";
+const CHECKOUT_URL = BASE_URL + "/payment/checkout/";
+export const RAZORPAY_URL = BASE_URL + "/payment/verification";
 
 export async function login({ email, password }) {
   try {
@@ -103,4 +105,13 @@ export async function deleteAddress(addressId) {
   } catch (err) {
     console.log(err);
   }
+}
+
+export async function orderCheckout(amount, cart) {
+  const token = localStorage.getItem("dominos_token");
+  const res = await axios.post(CHECKOUT_URL + token, {
+    amount,
+    cart,
+  });
+  return res.data;
 }

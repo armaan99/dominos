@@ -40,7 +40,7 @@ export default function UserNav({ setOpenUserNav }) {
           />
         </div>
         <div className="user-nav-body">
-          <Link
+          {/* <Link
             to="/trackorder"
             className="nav-options-box"
             onClick={() => {
@@ -54,7 +54,7 @@ export default function UserNav({ setOpenUserNav }) {
               />
             </div>
             <div className="option-title">TRACK CURRENT ORDER</div>
-          </Link>
+          </Link> */}
           <Link
             to="/orderhistory"
             className="nav-options-box"

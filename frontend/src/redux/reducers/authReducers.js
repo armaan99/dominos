@@ -1,5 +1,5 @@
 const auth = (
-  state = { user: { address: [] }, user_loggedin: false },
+  state = { user: { address: [], orders: [] }, user_loggedin: false },
   action
 ) => {
   if (action.type === "UPDATE_USER") {

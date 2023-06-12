@@ -1,0 +1,71 @@
+.order-history{
+    min-height: 100vh;
+    padding: 50px 5vw;
+    background-color: rgb(242 242 242);
+}
+.order-history-title{
+    text-align: center;
+}
+.orders-list{
+    margin-top: 50px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column-reverse;
+    gap: 20px;
+    align-items: center;
+}
+.order-card{
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(191 191 191);
+    padding: 15px 10px;
+}
+.order-card-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+}
+.order-status{
+    /* background-color: white; */
+    border: solid #1da81a 1px;
+    border-radius: 5px;
+    color: #1da81a;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+.order-date{
+    font-size: small;
+}
+.order-items{
+    font-size: small;
+    border-top: solid silver 1px;
+    border-bottom: solid silver 1px;
+    padding: 10px 0px;
+    margin: 10px 0px;
+}
+.order-item{
+    display: flex;
+    gap: 10px;
+    /* align-items: center; */
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+.order-veg-nonveg{
+    display: flex;
+    gap: 10px;
+}
+.order-item-veg,.order-item-nonveg{
+    height: 15px;
+}
+.order-item-name{
+    width: 300px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;;
+}
+.order-amount{
+    font-weight: bold;
+}

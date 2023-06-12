@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Checkout.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAddress, updateAddress, updateCartItem } from "../../api/index";
+import {
+  deleteAddress,
+  orderCheckout,
+  updateAddress,
+  updateCartItem,
+} from "../../api/index";
 import { updateCart } from "../../redux/actions/cartAction";
 import { updateUserAddress } from "../../redux/actions/UserAction";
+
+import { RAZORPAY_URL } from "../../api/index";
 
 export default function Checkout() {
   const cart = useSelector((state) => state.cart.cart);
@@ -64,6 +71,33 @@ export default function Checkout() {
     }
   }
   const [selectedAddress, setSelectedAddress] = useState();
+
+  async function handlePlaceOrder() {
+    const token = localStorage.getItem("dominos_token");
+    if (selectedAddress) {
+      const res = await orderCheckout(Math.floor(1.2 * subTotal), cart);
+      console.log(res);
+      const options = {
+        key: "rzp_test_yMZpHTW51eVzSm",
+        amount: res.order.amount,
+        currency: "INR",
+        name: "Dominos Clone",
+        description: "",
+        order_id: res.order.id,
+        callback_url: RAZORPAY_URL + "/" + token + "/" + res.id,
+        prefill: {
+          name: "User",
+          email: "",
+          contact: "9999999999",
+        },
+      };
+
+      var rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } else {
+      alert("Please select delivery address");
+    }
+  }
 
   return (
     <div className="checkout-pg">
@@ -257,7 +291,14 @@ export default function Checkout() {
               <div className="pdb-item-title">Grand Total</div>
               <div className="pdb-item-value">{Math.floor(1.2 * subTotal)}</div>
             </div>
-            <div className="place-order-btn">Place Order</div>
+            <div
+              className="place-order-btn"
+              onClick={() => {
+                handlePlaceOrder();
+              }}
+            >
+              Place Order
+            </div>
           </div>
         </div>
       </div>
